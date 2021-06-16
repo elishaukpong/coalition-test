@@ -64,17 +64,33 @@
                        </tr>
                        </thead>
                        <tbody id="lists">
+                       @php $overallTotalValueCount = 0 @endphp
                        @foreach($products as $product)
+                           @php
+                               $totalValueCount = $product->quantity_in_stock * $product->price_per_item;
+
+                                $overallTotalValueCount += $totalValueCount;
+                           @endphp
                            <tr>
                                <td>{{$product->product_name}}</td>
                                <td>{{$product->quantity_in_stock}}</td>
                                <td>{{$product->price_per_item}}</td>
                                <td>{{$product->time}}</td>
-                               <td>{{number_format($product->quantity_in_stock * $product->price_per_item)}}</td>
+                               <td>{{number_format($totalValueCount)}}</td>
                            </tr>
                            @endforeach
 
                        </tbody>
+                       <tfoot>
+                           <tr>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td>Sum of Values</td>
+                               <td>{{number_format($overallTotalValueCount)}}</td>
+                           </tr>
+                       </tfoot>
+
                    </table>
                </div>
            </div>
