@@ -32,7 +32,7 @@
 
                        <div class="form-group">
                            <label for="Product">Quantity in Stock</label>
-                           <input type="text" class="form-control" placeholder="Quantity in Stock" name="quanity_in_stock">
+                           <input type="text" class="form-control" placeholder="Quantity in Stock" name="quantity_in_stock">
                            <small class="form-text text-muted">Whats the count of the product in the store?</small>
                        </div>
 
