@@ -101,14 +101,20 @@
                     },
                     success:function(response){
                         $tableRow = `
+                                <tr>
                                 <td>${response.product_name}</td>
                                <td>${response.quantity_in_stock}</td>
                                <td>${response.price_per_item}</td>
                                <td>${response.time}</td>
                                <td>${new Intl.NumberFormat().format(response.quantity_in_stock * response.price_per_item)}</td>
+                            </tr>
                         `;
 
                         $('#lists').append($tableRow);
+
+                        $('#product_name').val('');
+                        $('#quantity_in_stock').val('');
+                        $('#price_per_item').val('');
                     },
                 });
             });
