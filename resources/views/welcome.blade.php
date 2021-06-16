@@ -65,12 +65,13 @@
                        </thead>
                        <tbody>
                        @foreach($products as $product)
+{{--                           {{dd($products)}}--}}
                            <tr>
-                               <td>{{$product['product_name']}}</td>
-                               <td>{{$product['quantity_in_stock']}}</td>
-                               <td>{{$product['price_per_item']}}</td>
-                               <td>{{$product['time']}}</td>
-                               <td>{{number_format($product['quantity_in_stock'] * $product['price_per_item'])}}</td>
+                               <td>{{$product->product_name}}</td>
+                               <td>{{$product->quantity_in_stock}}</td>
+                               <td>{{$product->price_per_item}}</td>
+                               <td>{{$product->time}}</td>
+                               <td>{{number_format($product->quantity_in_stock * $product->price_per_item)}}</td>
                            </tr>
                            @endforeach
 
@@ -82,31 +83,28 @@
     </body>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
+{{--    <script>--}}
+{{--        $(document).ready(function() {--}}
+{{--            $('#form-handler').on('click', function(e){--}}
+{{--                e.preventDefault();--}}
 
-    <script>
-        $(document).ready(function() {
-            $('#form-handler').on('click', function(e){
-                alert(e);
-
-                $.ajax({
-                    url: $('#submit-form').attr('action'),
-                    type:$('#submit-form').attr('method'),
-                    data:{
-                        "_token": "{{ csrf_token() }}",
-                        product_name:$('#product_name').val(),
-                        quantity_in_stock:$('#quantity_in_stock').val(),
-                        price_per_item:$('#price-per_item').val(),
-                    },
-                    success:function(response){
-                        console.log(response);
-                    },
-                });
-            });
-            });
-
-        });
-    </script>
+{{--                $.ajax({--}}
+{{--                    url: $('#submit-form').attr('action'),--}}
+{{--                    type:$('#submit-form').attr('method'),--}}
+{{--                    data:{--}}
+{{--                        "_token": "{{ csrf_token() }}",--}}
+{{--                        product_name:$('#product_name').val(),--}}
+{{--                        quantity_in_stock:$('#quantity_in_stock').val(),--}}
+{{--                        price_per_item:$('#price_per_item').val(),--}}
+{{--                    },--}}
+{{--                    success:function(response){--}}
+{{--                        console.log(response);--}}
+{{--                    },--}}
+{{--                });--}}
+{{--            });--}}
+{{--        });--}}
+{{--    </script>--}}
 </html>
