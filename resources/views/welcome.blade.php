@@ -63,9 +63,8 @@
                            <th scope="col">Total Value Number</th>
                        </tr>
                        </thead>
-                       <tbody>
+                       <tbody id="lists">
                        @foreach($products as $product)
-{{--                           {{dd($products)}}--}}
                            <tr>
                                <td>{{$product->product_name}}</td>
                                <td>{{$product->quantity_in_stock}}</td>
@@ -86,25 +85,33 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 
-{{--    <script>--}}
-{{--        $(document).ready(function() {--}}
-{{--            $('#form-handler').on('click', function(e){--}}
-{{--                e.preventDefault();--}}
+    <script>
+        $(document).ready(function() {
+            $('#form-handler').on('click', function(e){
+                e.preventDefault();
 
-{{--                $.ajax({--}}
-{{--                    url: $('#submit-form').attr('action'),--}}
-{{--                    type:$('#submit-form').attr('method'),--}}
-{{--                    data:{--}}
-{{--                        "_token": "{{ csrf_token() }}",--}}
-{{--                        product_name:$('#product_name').val(),--}}
-{{--                        quantity_in_stock:$('#quantity_in_stock').val(),--}}
-{{--                        price_per_item:$('#price_per_item').val(),--}}
-{{--                    },--}}
-{{--                    success:function(response){--}}
-{{--                        console.log(response);--}}
-{{--                    },--}}
-{{--                });--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
+                $.ajax({
+                    url: $('#submit-form').attr('action'),
+                    type:$('#submit-form').attr('method'),
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        product_name:$('#product_name').val(),
+                        quantity_in_stock:$('#quantity_in_stock').val(),
+                        price_per_item:$('#price_per_item').val(),
+                    },
+                    success:function(response){
+                        $tableRow = `
+                                <td>${response.product_name}</td>
+                               <td>${response.quantity_in_stock}</td>
+                               <td>${response.price_per_item}</td>
+                               <td>${response.time}</td>
+                               <td>${new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'NGN' }).format(response.quantity_in_stock * response.price_per_item)}</td>
+                        `;
+
+                        $('#lists').append($tableRow);
+                    },
+                });
+            });
+        });
+    </script>
 </html>

@@ -31,9 +31,9 @@ class storeController extends Controller
     public function addProduct(CreateProductRequest $request)
     {
 
-//        if(! $request->ajax()){
-//            return redirect()->back('error', 'Request has to be submitted via Ajax request');
-//        }
+        if(! $request->ajax()){
+            return redirect()->back('error', 'Request has to be submitted via Ajax request');
+        }
 
         if(file_exists($this->filename)){
             $previousStoreContent = (array) json_decode(file_get_contents($this->filename));
@@ -50,8 +50,6 @@ class storeController extends Controller
 
         file_put_contents($this->filename, json_encode($previousStoreContent)."\n");
 
-        return redirect()->back();
-
-//        return response()->json($newStoreContent);
+        return response()->json($newStoreContent);
     }
 }
