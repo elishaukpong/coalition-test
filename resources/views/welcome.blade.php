@@ -87,7 +87,7 @@
                                <td></td>
                                <td></td>
                                <td>Sum of Values</td>
-                               <td>{{number_format($overallTotalValueCount)}}</td>
+                               <td id="total" data-value="{{$overallTotalValueCount}}">{{number_format($overallTotalValueCount)}}</td>
                            </tr>
                        </tfoot>
 
@@ -117,7 +117,7 @@
                     },
                     success:function(response){
                         $tableRow = `
-                                <tr>
+                             <tr>
                                 <td>${response.product_name}</td>
                                <td>${response.quantity_in_stock}</td>
                                <td>${response.price_per_item}</td>
@@ -127,6 +127,11 @@
                         `;
 
                         $('#lists').append($tableRow);
+
+                        var newTotal = $('#total').data('value') + (response.quantity_in_stock * response.price_per_item);
+                        $('#total').text(new Intl.NumberFormat().format(newTotal));
+                        $('#total').data('value', newTotal);
+
 
                         $('#product_name').val('');
                         $('#quantity_in_stock').val('');
