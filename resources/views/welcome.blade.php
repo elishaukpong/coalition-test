@@ -22,27 +22,29 @@
                <div class="col-6 mx-auto">
                    <h2>Add Product to Store Listing</h2>
 
-                   <form action="{{route('store.add-product')}}" method="POST">
+                   <form action="{{route('store.add-product')}}" method="POST" id="submit-form">
+
+                       @csrf
 
                        <div class="form-group">
                            <label for="Product">Product Name</label>
-                           <input type="text" class="form-control" placeholder="Product Name" name="product_name">
+                           <input type="text" class="form-control" placeholder="Product Name" name="product_name" id="product_name">
                            <small  class="form-text text-muted">What is the name of the product you want to add</small>
                        </div>
 
                        <div class="form-group">
                            <label for="Product">Quantity in Stock</label>
-                           <input type="text" class="form-control" placeholder="Quantity in Stock" name="quantity_in_stock">
+                           <input type="text" class="form-control" placeholder="Quantity in Stock" id="quantity_in_stock" name="quantity_in_stock">
                            <small class="form-text text-muted">Whats the count of the product in the store?</small>
                        </div>
 
                        <div class="form-group">
                            <label for="Product">Price per Item</label>
-                           <input type="text" class="form-control" placeholder="Price per Item" name="price_per_item">
+                           <input type="text" class="form-control" placeholder="Price per Item" id="price_per_item" name="price_per_item">
                            <small class="form-text text-muted">At what price should one unit be sold?</small>
                        </div>
 
-                       <button type="submit" class="btn btn-primary">ADD ITEM</button>
+                       <button type="submit" class="btn btn-primary" id="form-handler">ADD ITEM</button>
                    </form>
                </div>
 
@@ -82,4 +84,29 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#form-handler').on('click', function(e){
+                alert(e);
+
+                $.ajax({
+                    url: $('#submit-form').attr('action'),
+                    type:$('#submit-form').attr('method'),
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        product_name:$('#product_name').val(),
+                        quantity_in_stock:$('#quantity_in_stock').val(),
+                        price_per_item:$('#price-per_item').val(),
+                    },
+                    success:function(response){
+                        console.log(response);
+                    },
+                });
+            });
+            });
+
+        });
+    </script>
 </html>
