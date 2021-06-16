@@ -20,13 +20,18 @@ class storeController extends Controller
 
     public function showListings()
     {
-        $data['products'] = [];
+        $products[] = [
+            'product_name' => 'Hello',
+            'quantity_in_stock' => 3,
+            'price_per_item' => 5,
+            'time' => now(),
+        ];
 
         if(file_exists($this->filename)){
-            $data['products'] = (array) json_decode(file_get_contents($this->filename));
+            $products[] = (array) json_decode(file_get_contents($this->filename));
         }
 
-        return view('welcome',$data);
+        return view('welcome')->with('products', $products);
 
     }
     public function addProduct(CreateProductRequest $request)

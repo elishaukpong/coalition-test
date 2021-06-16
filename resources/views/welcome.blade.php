@@ -62,13 +62,15 @@
                        </tr>
                        </thead>
                        <tbody>
-                       <tr>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                           <td></td>
-                       </tr>
+                       @foreach($products as $product)
+                           <tr>
+                               <td>{{$product['product_name']}}</td>
+                               <td>{{$product['quantity_in_stock']}}</td>
+                               <td>{{$product['price_per_item']}}</td>
+                               <td>{{$product['time']}}</td>
+                               <td>{{number_format($product['quantity_in_stock'] * $product['price_per_item'])}}</td>
+                           </tr>
+                           @endforeach
 
                        </tbody>
                    </table>
