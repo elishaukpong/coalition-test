@@ -105,7 +105,7 @@
                                <td>${response.quantity_in_stock}</td>
                                <td>${response.price_per_item}</td>
                                <td>${response.time}</td>
-                               <td>${new Intl.NumberFormat('ja-JP', { style: 'currency', currency: 'NGN' }).format(response.quantity_in_stock * response.price_per_item)}</td>
+                               <td>${new Intl.NumberFormat().format(response.quantity_in_stock * response.price_per_item)}</td>
                         `;
 
                         $('#lists').append($tableRow);
